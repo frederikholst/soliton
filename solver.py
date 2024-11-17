@@ -41,10 +41,10 @@ def KdV_Solver(u, Delta_x, Delta_t, mu=1, eps=-6):
         for i in range(2, x_size -2):
 
             if j == 0:
-                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-1,j] )
-
+                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
+            
             else:
-                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-1,j] )
+                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
 
         # We assume fixed values for
         u[1,j] = 0
@@ -60,7 +60,7 @@ def KdV_Solver(u, Delta_x, Delta_t, mu=1, eps=-6):
 if __name__ == "__main__":
 
     ## Defining constants: ##
-    Delta_x = 1                       # Spacial step size
+    Delta_x = 0.2                       # Spacial step size
     X_max = 40                          # System length
     x_size = int(X_max/Delta_x)         # Number of steps in position
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     
     # Let's compute the solution!
     u_solution = KdV_Solver(u, Delta_x, Delta_t)
-
+    
     # Plotting results
     fig,axes=plt.subplots(2,3,figsize=(12,8))
     T_series=range(0,18,3)
@@ -95,3 +95,8 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.savefig("Soliton_plot_try.png")
     plt.show()
+    '''
+
+    plt.plot(x_series, u_solution[:, 1], ".")
+    plt.show()
+    '''
