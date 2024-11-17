@@ -1,3 +1,4 @@
+
 ### In this script we will implement the finite difference method to solve the Korteveg DeVries equation. 
 
 import numpy as np
