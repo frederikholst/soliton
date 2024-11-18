@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from soliton_plot import *
 
-def KdV_Solver(u, Delta_x = 0.2, Delta_t=0.001, bounds = (0,0), mu=1, eps=-6):
+def KdV_Solver(u, Delta_x = 0.2, Delta_t=0.001, bounds = (0,0), mu=1, eps=-6,lin=False):
     """
     Computes the solution to the KdV equation using finite difference method.
 
@@ -30,15 +30,16 @@ def KdV_Solver(u, Delta_x = 0.2, Delta_t=0.001, bounds = (0,0), mu=1, eps=-6):
     t_size = len(u[0,:])
     x_size = len(u[:,0])
 
-    
+    l=int(lin)
+
     for j in range(t_size-1):
         for i in range(2, x_size -2):
 
             if j == 0:
-                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
+                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * ((1-l)*u[i,j] + l)* (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
             
             else:
-                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * u[i,j] * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
+                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * ((1-l)*u[i,j] + l) * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
 
         # We assume fixed values for
         u[0,j+1] = bounds[0]
