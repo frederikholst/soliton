@@ -33,13 +33,6 @@ def KdV_Solver(u, Delta_x = 0.2, Delta_t=0.001, bounds = (0,0), mu=1, eps=-6,lin
     l=int(lin)
 
     for j in range(t_size-1):
-        for i in range(2, x_size -2):
-
-            if j == 0:
-                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * ((1-l)*u[i,j] + l)* (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
-            
-            else:
-                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * ((1-l)*u[i,j] + l) * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
 
         # We assume fixed values for
         u[0,j+1] = bounds[0]
@@ -48,7 +41,15 @@ def KdV_Solver(u, Delta_x = 0.2, Delta_t=0.001, bounds = (0,0), mu=1, eps=-6,lin
         # We fix the derivative to be zero at the boundary:
         u[1,j+1] = u[0,j+1] 
         u[-2,j+1] = u[-1,j+1]
-    
+
+        for i in range(2, x_size -2):
+
+            if j == 0:
+                u[i,j+1] = u[i, j] - Delta_t/(2*Delta_x) * eps * ((1-l)*(u[i,j]+u[i-1,j]+u[i+1,j])/3 + l)* (u[i+1,j] - u[i-1,j]) - Delta_t/(2*Delta_x**3) * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
+            
+            else:
+                u[i,j+1] = u[i, j-1] - Delta_t/Delta_x * eps * ((1-l)*(u[i,j]+u[i-1,j]+u[i+1,j])/3 + l) * (u[i+1,j] - u[i-1,j]) - Delta_t/Delta_x**3 * mu *(u[i+2,j] - 2*u[i+1,j] +2*u[i-1,j]-u[i-2,j] )
+   
     return u 
         
 
