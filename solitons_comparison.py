@@ -30,5 +30,5 @@ u_sol_list=[u_solution[:, int(i / Delta_t)] for i in T_series]
 u_ana_list=[np.array([soliton_solution(x, i + t_0) for x in x_series]) for i in T_series]
 
 # Save zip file:
-np.savez('solitons_comparison.npz', u_sol=u_sol_list, u_ana=u_ana_list, x_series=x_series)
+np.savez('Data\\solitons_comparison.npz', u_sol=u_sol_list, u_ana=u_ana_list, x_series=x_series)
 

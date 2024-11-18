@@ -30,7 +30,7 @@ output_data = np.column_stack((x_series, u_solution))
 #file_name = 'test_solver.txt'
 #np.savetxt(file_name, output_data, delimiter=' ', fmt='%10.5f', header='position' + ' '.join([f't_{i*Delta_t:.3f}' for i in range(t_size)]))
 
-filename = 'test_solver_data.npy'
+filename = 'Data\\test_solver_data.npy'
 np.save(filename, output_data)
     
     
