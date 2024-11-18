@@ -9,7 +9,7 @@ data = np.load('Data\\advection.npz')
 
 # Access individual arrays
 u_solution_sol = data['u_sol']
-u_solution_kink= data['u_kink']
+u_solution_gaus= data['u_gaus']
 x_series = data['x_series']
 T_series=data['T']
 # Plotting 
@@ -17,7 +17,7 @@ fig,axes = plt.subplots(2,3,figsize=(12,8))
 
 
 for i, ax in enumerate(axes.flat):
-        ax.plot(x_series, u_solution_kink[i],".",label="Kink")
+        ax.plot(x_series, u_solution_gaus[i],".",label="Gaus")
         ax.plot(x_series, u_solution_sol[i],".",label="Soliton")
         # Axes title
         ax.set_title(f't = {round(T_series[i],2)}', fontsize=15)

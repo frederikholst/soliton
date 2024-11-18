@@ -56,7 +56,7 @@ u_conv_sol_list=[u_solution[3],u_sol_2,u_sol_4]
 u_conv_ana_list=[u_ana_list[3],u_ana_2,u_ana_4]
 
 x_series_list=[x_series,x_series2,x_series4]
-DeltaX_list=[0.08,0.04,0.02]
+DeltaX_list=[0.8,0.4,0.2]
 for i, ax in enumerate(axes.flat):
         ax.plot(x_series_list[i],u_conv_sol_list[i],".",label="Numerical solutions")
         ax.plot(x_series_list[i],u_conv_ana_list[i],label="Analytic solutions")
@@ -79,5 +79,3 @@ plt.tight_layout()
 plt.savefig("Figures//solitons_convergence.png")
 plt.show()
 plt.clf()
-
-
