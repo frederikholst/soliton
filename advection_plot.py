@@ -8,17 +8,19 @@ from soliton_plot import *
 data = np.load('Data\\advection.npz')
 
 # Access individual arrays
-u_solution = data['u_sol']
+u_solution_sol = data['u_sol']
+u_solution_kink= data['u_kink']
 x_series = data['x_series']
-
+T_series=data['T']
 # Plotting 
 fig,axes = plt.subplots(2,3,figsize=(12,8))
 
 
 for i, ax in enumerate(axes.flat):
-        ax.plot(x_series, u_solution[i],".",label="Numerical solutions")
+        ax.plot(x_series, u_solution_kink[i],".",label="Kink")
+        ax.plot(x_series, u_solution_sol[i],".",label="Soliton")
         # Axes title
-        ax.set_title(f't = {10 + i*3}', fontsize=15)
+        ax.set_title(f't = {round(T_series[i],2)}', fontsize=15)
         
         # Axes label
         if i == 3 or i == 4 or i == 5:

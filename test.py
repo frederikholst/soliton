@@ -41,4 +41,3 @@ def test_squared_residuals():
         analytical = np.array([soliton_solution(x, t + t_0) for x in x_series])
         residual = np.sum((numerical - analytical) ** 2)
         assert residual < tol, f"Residual {residual} exceeds tolerance at t = {t + t_0}"
-
