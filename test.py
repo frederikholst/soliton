@@ -1,49 +1,44 @@
-# Here we perform 
-from solver import *
-from soliton_plot import *
+from solver import KdV_Solver
+from soliton_plot import soliton_solution
+import numpy as np
 
-# A tolerance is set:
-tol=1e-2
+# Set tolerance for testing
+tol = 1e-3
 
-## Defining constants: ##
-Delta_x = 0.2                  # Spacial step size
-X_max = 40                          # System length
-x_size = int(X_max/Delta_x)         # Number of steps in position
+# Define constants
+Delta_x = 0.2                  # Spatial step size
+X_max = 40                     # System length
+x_size = int(X_max / Delta_x)  # Number of spatial steps
 
-Delta_t = 0.0005
-T_max = 20
-t_size = int(T_max/Delta_t)
+Delta_t = 0.001                # Time step size
+T_max = 20                     # Maximum time
+t_size = int(T_max / Delta_t)  # Number of time steps
 
-u = np.zeros([x_size, t_size], dtype = float)
+# Initialize the solution array
+u = np.zeros([x_size, t_size], dtype=float)
 
 # Initial condition
-x_series=[n*Delta_x for n in range(x_size)]                      # A 1xN array of the positions 
-t_0 = 10                                                         # initial time
-u[:,0]=np.array([soliton_solution(x,t_0) for x in x_series])    # With the imported function from soliton_plot.py we find the Soliton for t=0.
+x_series = np.linspace(0, X_max, x_size)  # Array of positions
+t_0 = 10                                 # Initial time
+u[:, 0] = np.array([soliton_solution(x, t_0) for x in x_series])  # Soliton at t=0
 
-# Let's compute the solution!
+# Compute the numerical solution
 u_solution = KdV_Solver(u, Delta_x, Delta_t)
 
-# Plotting results
-fig,axes=plt.subplots(2,3,figsize=(12,8))
-T_series=range(0,18,3)
-u_analytic=np.array([soliton_solution(x,t_0) for x in x_series])
-# Each subplot of A_series[i] vs. x_series:
-for i, ax in enumerate(axes.flat):
-    ax.plot(x_series, u_solution[:,int(1./Delta_t * (T_series[i]))],".")  # Plot each A_series element
-    ax.plot(x_series, np.array([soliton_solution(x,T_series[i]) for x in x_series]))
-    ax.set_title(f't = {t_0 + T_series[i]}')
-    ax.set_xlabel('x [A.U.]')
-    ax.set_ylabel('Amplitude [A.U.]')
+# Define time series for plotting and testing
+T_series = range(0, 6,1)
 
+# Calculate the residual for a specific time
+res_sq_sum = np.sum(
+    (u_solution[:, int(T_series[2] / Delta_t)] - 
+     np.array([soliton_solution(x, T_series[2] + t_0) for x in x_series])) ** 2
+    )
 
-# To prevent overlap
-plt.tight_layout()
-plt.savefig("Soliton_plot_try.png")
-plt.show()
-
-
-# Test 
-#def test_add():
-#    assert
+# Test function
+def test_squared_residuals():
+    for t in T_series[1:]:  # Skip the initial time step (t=0)
+        numerical = u_solution[:, int(t / Delta_t)]
+        analytical = np.array([soliton_solution(x, t + t_0) for x in x_series])
+        residual = np.sum((numerical - analytical) ** 2)
+        assert residual < tol, f"Residual {residual} exceeds tolerance at t = {t + t_0}"
 
