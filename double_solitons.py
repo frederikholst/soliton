@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Define constants
 Delta_x = 0.2                  # Spatial step size
-X_max = 40                     # System length
+X_max = 80                     # System length
 x_size = int(X_max / Delta_x)  # Number of spatial steps
 
 Delta_t = 0.001                # Time step size
@@ -18,8 +18,7 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 # Initialize start condition
 x_series = np.linspace(0, X_max, x_size)  # Positions
-t_0 = 10                                  # Initial time
-u[:, 0] = np.array([soliton_solution(x, t_0,c=1, x0=X_max/2)+soliton_solution(x,t_0,c=2,x0=0.) for x in x_series])  # Soliton at t0
+u[:, 0] = np.array([soliton_solution(x, t=0,c=1, x0=20.)+soliton_solution(x,t=0,c=2,x0=10.) for x in x_series])  # Soliton at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
