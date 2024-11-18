@@ -43,5 +43,5 @@ if __name__ == "__main__":
 
     # To prevent overlap
     plt.tight_layout()
-    plt.savefig("Soliton_plot.png")
+    plt.savefig("Figures\\Soliton_plot.png")
     plt.show()
