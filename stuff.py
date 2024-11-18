@@ -39,4 +39,21 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.savefig("Soliton_plot_try.png")
     
+    # Plotting results
+fig,axes=plt.subplots(2,3,figsize=(12,8))
+T_series=range(0,18,3)
+#T_series=range(0,4,3)
+plt.rcParams['font.size'] = 20
+
     
+# Each subplot of A_series[i] vs. x_series:
+for i, ax in enumerate(axes.flat):
+        ax.plot(x_series, u_solution[:, int(1./Delta_t * (T_series[i]))],".")  # Plot each A_series element
+        ax.set_title(f't = {t_0 + T_series[i]}')
+        ax.set_xlabel('x [A.U.]')
+        ax.set_ylabel('Amplitude [A.U.]')
+    
+    
+# To prevent overlap
+plt.tight_layout()
+plt.savefig("Soliton_plot_try.png")

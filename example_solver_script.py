@@ -4,7 +4,7 @@ from soliton_plot import *
 from finite_difference import *
 
 ## Defining constants: ##
-Delta_x=0.1 # Spacial step size
+Delta_x = 0.1 # Spacial step size
 X_max=30 # System length
 
 N_step_x=int(X_max/Delta_x) # Number of steps in position
@@ -19,6 +19,7 @@ T_series=np.linspace(0,9,6)
 u_list=[KdV_Solver(u,T_max,Delta_x,Delta_t=0.001) for T_max in T_series]
 
 fig,axes=plt.subplots(2,3,figsize=(12,8))
+plt.rcParams['font.size'] = 12
 
 # Each subplot of A_series[i] vs. x_series:
 for i, ax in enumerate(axes.flat):
