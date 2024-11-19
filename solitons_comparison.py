@@ -18,8 +18,8 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 # Initialize start condition
 x_series = np.linspace(0, X_max, x_size)  # Positions
-t_0 = 10                                  # Initial time
-u[:, 0] = np.array([soliton_solution(x, t_0) for x in x_series])  # Soliton at t0
+x0 = 10                                  # Initial space
+u[:, 0] = np.array([soliton_solution(x,t=0, x0=x0) for x in x_series])  # Soliton at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
@@ -27,7 +27,7 @@ u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
 # Extract six sample points from the solutions:
 T_series=range(0,18,3)
 u_sol_list=[u_solution[:, int(i / Delta_t)] for i in T_series]
-u_ana_list=[np.array([soliton_solution(x, i + t_0) for x in x_series]) for i in T_series]
+u_ana_list=[np.array([soliton_solution(x,t=i,x0=x0) for x in x_series]) for i in T_series]
 
 
 ## PART 2: We now double the grid size by a factor of 2 and 4 respectively to check for convergence. 
@@ -42,14 +42,14 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 x_series2 = np.linspace(0, X_max, x_size)  # Positions
 
-u[:, 0] = np.array([soliton_solution(x, t_0) for x in x_series2])  # Soliton at t0
+u[:, 0] = np.array([soliton_solution(x, t=0,x0=x0) for x in x_series2])  # Soliton at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
 
 # Extract one sample with:
 u_sol_2=u_solution[:, int(T_series[3] / Delta_t)]
-u_ana_2=np.array([soliton_solution(x, T_series[3] + t_0) for x in x_series2])
+u_ana_2=np.array([soliton_solution(x, T_series[3],x0=x0) for x in x_series2])
 
 ## FACTOR 4: ##
 # Define constants
@@ -61,14 +61,14 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 x_series4 = np.linspace(0, X_max, x_size)  # Positions
 
-u[:, 0] = np.array([soliton_solution(x, t_0) for x in x_series4])  # Soliton at t0
+u[:, 0] = np.array([soliton_solution(x, t=0,x0=x0) for x in x_series4])  # Soliton at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
 
 # Extract one sample at t=19:
 u_sol_4=u_solution[:, int(T_series[3] / Delta_t)]
-u_ana_4=np.array([soliton_solution(x, T_series[3] + t_0) for x in x_series4])
+u_ana_4=np.array([soliton_solution(x, T_series[3],x0=x0) for x in x_series4])
 
 
 # Save zip file:
