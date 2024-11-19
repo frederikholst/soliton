@@ -27,8 +27,8 @@ def soliton_solution(x,t,c=1,x0=0):
 if __name__ == "__main__":
     # The plots shouldn't be imported with the functions above:
     x_series =np.arange(0,40,0.5)
-    t_series=np.arange(10,28,3)
-    A_series=[soliton_solution(x_series,t) for t in t_series]
+    t_series=np.arange(0,18,3)
+    A_series=[soliton_solution(x_series,t,x0=10) for t in t_series]
 
 
     fig, axes = plt.subplots(2, 3, figsize=(12, 8))
