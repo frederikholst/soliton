@@ -2,12 +2,10 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-#from soliton_plot import *
-#from solver import *
+
 
 # Loading data to plot
-#filename = 'test_solver.txt'
-#data = np.loadtxt(filename, delimiter = ' ', skiprows=1)
+
 filename = 'test_solver_data.npy'
 data = np.load(filename)
 
