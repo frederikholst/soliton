@@ -29,7 +29,7 @@ for i, ax in enumerate(axes.flat):
         ax.plot(x_series, u_solution[i],".",label="Numerical solutions")
         ax.plot(x_series,u_ana_list[i],label="Analytic solutions")
         # Axes title
-        ax.set_title(f't = {10 + i*3}', fontsize=15)
+        ax.set_title(f't = {i*3}', fontsize=15)
         
         # Axes label
         if i == 3 or i == 4 or i == 5:
