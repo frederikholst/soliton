@@ -20,5 +20,5 @@ ax.tick_params(axis='both', labelsize=15)
 
 # To prevent overlap
 plt.tight_layout()
-plt.savefig("Figures\\res.png")
+plt.savefig("Figures\\soliton_res.png")
 plt.show()

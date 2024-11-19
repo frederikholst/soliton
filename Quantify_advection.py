@@ -27,8 +27,8 @@ def init(x,mu=X_max/2,sig=1):
 u_gaus_init[:, 0] = np.array([init(x) for x in x_series]) 
 
 # Define, for comparison, the soliton initial condition
-t_0 = 20                                  # Initial time
-u_soliton_init[:, 0] = np.array([soliton_solution(x, t_0) for x in x_series])  # Soliton at t0
+x0= 20                                  # Initial time
+u_soliton_init[:, 0] = np.array([soliton_solution(x, t=0,x0=x0) for x in x_series])  # Soliton at x0
 
 # Solve the KdV equation
 u_solution_sol = KdV_Solver(u_soliton_init, Delta_x, Delta_t, lin=True, mu=0) # Solutions for time up to T_max
@@ -36,13 +36,18 @@ u_solution_sol = KdV_Solver(u_soliton_init, Delta_x, Delta_t, lin=True, mu=0) # 
 u_solution_gaus = KdV_Solver(u_gaus_init, Delta_x, Delta_t, lin=True, mu=0)
 
 eps=-6
-# Extract six sample solutions from each of them:
-T_series=np.linspace(0,3,6)
-u_sol_list=[u_solution_sol[:, int(t / Delta_t)] for t in T_series]
-u_gaus_list=[u_solution_gaus[:, int(t / Delta_t)] for t in T_series]
-u_gaus_ana=[np.array([init(x,X_max/2+t*eps) for x in x_series]) for t in T_series]
+T_series = np.linspace(0, 2.5,40)
 
 
-plt.plot(x_series,u_gaus_list[-2],".")
-plt.plot(x_series,u_gaus_ana[-2])
-plt.show()
+residals_list=[]
+residual_list_gauss=[]
+for t in T_series:  # Skip the initial time step (t=0)
+    numerical_sol = u_solution_sol[:, int(t / Delta_t)]
+    analytical_sol= np.array([soliton_solution(x, t=0,x0=x0+t*eps) for x in x_series])
+    numerical_gaus = u_solution_gaus[:, int(t / Delta_t)]
+    analytical_gauss= np.array([init(x,X_max/2+t*eps) for x in x_series])
+    residual_sol = np.sum((numerical_sol - analytical_sol) ** 2)
+    residals_list.append(residual_sol)
+    residual_gauss = np.sum((numerical_gaus - analytical_gauss) ** 2)
+    residual_list_gauss.append(residual_gauss)
+np.savez('Data\\Res_list',sol_list=residals_list, gauss_list=residual_list_gauss)
