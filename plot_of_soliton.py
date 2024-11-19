@@ -4,8 +4,9 @@ from soliton_plot import *
 
 # Plot of a soliton (analytic solution)
 x_series =np.arange(0,40,0.1)
-t_series=np.arange(10,28,3)
-A_series=[soliton_solution(x_series,t) for t in t_series]
+#t_series=np.arange(10,28,3)
+t_series = np.arange(0,18,3)
+A_series=[soliton_solution(x_series,t, x0 = 10) for t in t_series]
 
 fig, axes = plt.subplots(2, 3, figsize=(12, 8))
 
@@ -25,4 +26,4 @@ for i, ax in enumerate(axes.flat):
 
 
 plt.tight_layout()
-plt.savefig("Figures\\Soliton_plot.png")
+plt.savefig("Figures\\Soliton_plot_new.png")
