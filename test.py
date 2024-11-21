@@ -28,11 +28,6 @@ u_solution = KdV_Solver(u, Delta_x, Delta_t)
 # Define time series for plotting and testing
 T_series = range(0, 6,1)
 
-# Calculate the residual for a specific time
-res_sq_sum = np.sum(
-    (u_solution[:, int(T_series[2] / Delta_t)] - 
-     np.array([soliton_solution(x, T_series[2] + t_0) for x in x_series])) ** 2
-    )
 
 # Test function
 def test_squared_residuals():
