@@ -15,9 +15,9 @@ t_size = int(T_max / Delta_t)  # Number of time steps
 
 # Initialize solution array
 u = np.zeros([x_size, t_size], dtype=float)
-
+edge_off_set=5
 # Initialize start condition
-x_series = np.linspace(0, X_max, x_size)  # Positions
+x_series = np.linspace(-edge_off_set, X_max-edge_off_set, x_size)  # Positions
 x0 = 10                                  # Initial space
 u[:, 0] = np.array([soliton_solution(x,t=0, x0=x0) for x in x_series])  # Soliton at t0
 

@@ -35,12 +35,13 @@ for i, ax in enumerate(axes.flat):
         if i == 3 or i == 4 or i == 5:
             ax.set_xlabel('x [A.U.]', fontsize = 15)
         if i==2:
-            ax.legend()
+            ax.legend(fontsize=14)
         if i == 0 or i == 3:
             ax.set_ylabel('Amplitude [A.U.]', fontsize = 15)
         
         # Ticks font size
         ax.tick_params(axis='both', labelsize=15)  
+        ax.set_ylim(-0.51,0.2)
 
 # To prevent overlap
 plt.tight_layout()
@@ -66,16 +67,16 @@ for i, ax in enumerate(axes.flat):
         # Axes label
         ax.set_xlabel('x [A.U.]', fontsize = 15)
         if i==2:
-            ax.legend()
+            ax.legend(fontsize=14)
         ax.set_ylabel('Amplitude [A.U.]', fontsize = 15)
         
         # Ticks font size
         ax.tick_params(axis='both', labelsize=15)  
 
-        ax.set_ylim(-0.2,0.05)
+        ax.set_ylim(-0.2,0.1)
 
 # To prevent overlap
 plt.tight_layout()
 plt.savefig("Figures//solitons_convergence.png")
-plt.show()
+
 plt.clf()
