@@ -18,7 +18,7 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 # Initialize start condition
 x_series = np.linspace(0, X_max, x_size)  # Positions
-u[:, 0] = np.array([soliton_solution(x, t=0,c=1, x0=20.)+soliton_solution(x,t=0,c=2,x0=10.) for x in x_series])  # Soliton at t0
+u[:, 0] = np.array([soliton_solution(x, t=0,c=0.5, x0=20.)+soliton_solution(x,t=0,c=3,x0=10.) for x in x_series])  # Soliton at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
@@ -27,5 +27,7 @@ u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max
 T_series=range(0,18,3)
 u_sol_list=[u_solution[:, int(i / Delta_t)] for i in T_series]
 
+param=np.array([X_max, T_max])
+
 # Save zip file:
-np.savez('Data\\double_solitons.npz', u_sol=u_sol_list, x_series=x_series)
+np.savez('Data\\double_solitons.npz', u_sol=u_solution, parameters=param)
