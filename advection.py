@@ -1,7 +1,7 @@
 from solver import KdV_Solver
 from soliton_plot import soliton_solution
 import numpy as np
-import matplotlib.pyplot as plt
+
 
 
 # Define constants

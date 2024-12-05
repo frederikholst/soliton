@@ -26,7 +26,7 @@ for i, ax in enumerate(axes.flat):
         if i == 3 or i == 4 or i == 5:
             ax.set_xlabel('x [A.U.]', fontsize = 15)
         if i==2:
-            ax.legend()
+            ax.legend(fontsize=14)
         if i == 0 or i == 3:
             ax.set_ylabel('Amplitude [A.U.]', fontsize = 15)
         
