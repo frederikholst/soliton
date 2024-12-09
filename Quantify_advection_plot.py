@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-data=np.load("Data\\Res_list.npz")
+#data=np.load("Data\\Res_list.npz")
+data=np.load("Data/Res_list.npz") # Linux
 
 res_sol=data['sol_list']
 res_gaus=data['gauss_list']
@@ -29,5 +30,6 @@ ax[1].tick_params(axis='both', labelsize=15)
 
 # To prevent overlap
 plt.tight_layout()
-plt.savefig("Figures\\advection_res.png")
+#plt.savefig("Figures\\advection_res.png")
+plt.savefig("Figures/advection_res.png") # Linux
 plt.clf()
