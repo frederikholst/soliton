@@ -31,5 +31,5 @@ for i, ax in enumerate(axes.flat):
 
 # To prevent overlap
 plt.tight_layout()
-plt.savefig("Figures//kink.png")
+plt.savefig("Figures//kink2.png")
 plt.show()
