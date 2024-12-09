@@ -9,7 +9,7 @@ Delta_x = 0.2                  # Spatial step size
 X_max = 40                     # System length
 x_size = int(X_max / Delta_x)  # Number of spatial steps
 
-Delta_t = 0.001                # Time step size
+Delta_t = 0.0001                # Time step size
 T_max = 20                     # Maximum time
 t_size = int(T_max / Delta_t)  # Number of time steps
 x_series = np.linspace(0, X_max, x_size)  # Positions

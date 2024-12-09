@@ -13,7 +13,7 @@ ax.set_title("Quantifying solver performance at different times")
 
 # Axes label
 ax.set_xlabel('Time', fontsize = 15)
-ax.set_ylabel('Sum of squared Residuals', fontsize = 15)
+ax.set_ylabel('Sum of norm of Residuals', fontsize = 15)
 
 # Ticks font size
 ax.tick_params(axis='both', labelsize=15)  
