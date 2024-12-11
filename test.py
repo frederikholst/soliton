@@ -26,17 +26,13 @@ def test_no_change_with_zero_coefficients():
         )
 
 
-
-
-
-
 ### FUNCTIONAL TEST ###
 
 
 # Test function
 def test_squared_residuals():
-        # Set tolerance for testing
-    tol = 1e-3
+    # Set tolerance for testing
+    
 
     # Define constants
     Delta_x = 0.2                  # Spatial step size
@@ -46,7 +42,7 @@ def test_squared_residuals():
     Delta_t = 0.001                # Time step size
     T_max = 20                     # Maximum time
     t_size = int(T_max / Delta_t)  # Number of time steps
-
+    tol = 0.001*x_size
     # Initialize the solution array
     u = np.zeros([x_size, t_size], dtype=float)
 
@@ -64,5 +60,5 @@ def test_squared_residuals():
     for t in T_series[1:]:  # Skip the initial time step (t=0)
         numerical = u_solution[:, int(t / Delta_t)]
         analytical = np.array([soliton_solution(x, t + t_0) for x in x_series])
-        residual = np.sum((numerical - analytical) ** 2)
+        residual = np.sum(np.sqrt((numerical - analytical) ** 2))
         assert residual < tol, f"Residual {residual} exceeds tolerance at t = {t + t_0}"
