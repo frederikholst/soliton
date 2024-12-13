@@ -18,7 +18,7 @@ u = np.zeros([x_size, t_size], dtype=float)
 
 # Initialize start condition
 x_series = np.linspace(0, X_max, x_size)  # Positions
-u[:, 0] = np.array([soliton_solution(x, t=0,c=0.5, x0=20.)+soliton_solution(x,t=0,c=3,x0=10.) for x in x_series])  # Soliton at t0
+u[:, 0] = np.array([soliton_solution(x, t=0,c=0.5, x0=20.)+soliton_solution(x,t=0,c=3,x0=10.) for x in x_series])  # Two solitons at t0
 
 # Solve the KdV equation
 u_solution = KdV_Solver(u, Delta_x, Delta_t) # Solutions for time up to T_max

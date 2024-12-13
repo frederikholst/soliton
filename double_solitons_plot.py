@@ -32,6 +32,7 @@ for i, ax in enumerate(axes.flat):
         ax.tick_params(axis='both', labelsize=15)  
         '''
 
+#plot a colormap
 plt.imshow(u_solution, extent=[0, param[1], 0, param[0]], aspect='auto',origin='lower')
 plt.ylabel('x [A.U.]', fontsize = 15)
 plt.xlabel('t [A.U.]', fontsize = 15)

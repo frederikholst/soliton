@@ -23,7 +23,7 @@ def gaussian(x, mu, sig):
     )
 
 # Initialize start condition
-x_series = np.linspace(0, X_max, x_size)  # Positions                                 # Initial time
+x_series = np.linspace(0, X_max, x_size)  # Positions                               w
 u[:, 0] = np.array([gaussian(x, X_max/2, 8) for x in x_series])  # gaussian at t0
 
 # Solve the KdV equation
