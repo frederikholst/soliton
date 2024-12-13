@@ -9,7 +9,7 @@ Delta_x = 0.2                  # Spatial step size
 X_max = 40                     # System length
 x_size = int(X_max / Delta_x)  # Number of spatial steps
 
-Delta_t = 0.001                # Time step size
+Delta_t = 0.0001                # Time step size
 T_max = 20                     # Maximum time
 t_size = int(T_max / Delta_t)  # Number of time steps
 x_series = np.linspace(0, X_max, x_size)  # Positions
@@ -46,8 +46,10 @@ for t in T_series:  # Skip the initial time step (t=0)
     analytical_sol= np.array([soliton_solution(x, t=0,x0=x0+t*eps) for x in x_series])
     numerical_gaus = u_solution_gaus[:, int(t / Delta_t)]
     analytical_gauss= np.array([init(x,X_max/2+t*eps) for x in x_series])
-    residual_sol = np.sum((numerical_sol - analytical_sol) ** 2)
+    residual_sol = np.sqrt(np.sum(((numerical_sol - analytical_sol)) ** 2))
+    #residual_sol = np.sum(np.abs((numerical_sol - analytical_sol)))
     residals_list.append(residual_sol)
-    residual_gauss = np.sum((numerical_gaus - analytical_gauss) ** 2)
+    residual_gauss = np.sqrt(np.sum(((numerical_gaus - analytical_gauss)) ** 2))
     residual_list_gauss.append(residual_gauss)
 np.savez('Data\\Res_list',sol_list=residals_list, gauss_list=residual_list_gauss)
+#np.savez('Data/Res_list',sol_list=residals_list, gauss_list=residual_list_gauss) # Linux

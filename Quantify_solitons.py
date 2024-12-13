@@ -33,7 +33,7 @@ residals_list=[]
 for t in T_series:  # Skip the initial time step (t=0)
     numerical = u_solution[:, int(t / Delta_t)]
     analytical = np.array([soliton_solution(x, t + t_0) for x in x_series])
-    residual = np.sum((numerical - analytical) ** 2)
+    residual = np.sum(np.sqrt((numerical - analytical) ** 2))
     residals_list.append(residual)
 
 np.save("Data\\Res_list",residals_list)
